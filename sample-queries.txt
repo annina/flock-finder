@@ -1,0 +1,26 @@
+
+Queries for overpass-turbo.eu that result in a data file that can be entered into the database. 
+The query below is for ALPR (automated license plate readers). 
+
+[out:json][timeout:300];
+
+node
+  ["man_made"="surveillance"]
+  ["surveillance:type"="ALPR"]
+  ({{bbox}});
+
+out body;
+
+This is for all surveillance cameras. 
+
+[out:json][timeout:300];
+
+(
+  node["man_made"="surveillance"]({{bbox}});
+  way["man_made"="surveillance"]({{bbox}});
+  relation["man_made"="surveillance"]({{bbox}});
+);
+
+out body;
+>;
+out skel qt;
